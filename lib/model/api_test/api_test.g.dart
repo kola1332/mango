@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api.dart';
+part of 'api_test.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -26,12 +26,12 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RestClient implements RestClient {
-  _RestClient(
+class _RestClient1 implements RestClient1 {
+  _RestClient1(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175';
+    baseUrl ??= 'https://5d42a6e2bc64f90014a56ca0.mockapi.io/api/v1/';
   }
 
   final Dio _dio;
@@ -39,26 +39,50 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<Map<String, Task>> getTasks() async {
+  Future<Task> getTask() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Map<String, Task>>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Task>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '',
+              '/task',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!.map((k, dynamic v) =>
-        MapEntry(k, Task.fromJson(v as Map<String, dynamic>)));
+    final value = Task.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<Task>> getTasks() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Task>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/tasks',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => Task.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

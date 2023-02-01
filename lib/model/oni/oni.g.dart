@@ -1,23 +1,36 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api.dart';
+part of 'oni.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Task _$TaskFromJson(Map<String, dynamic> json) => Task(
+OniModel _$OniModelFromJson(Map<String, dynamic> json) => OniModel(
       id: json['id'] as String?,
       name: json['name'] as String?,
       avatar: json['avatar'] as String?,
       createdAt: json['createdAt'] as String?,
-    );
+    )..home_store = (json['home_store'] as List<dynamic>?)
+        ?.map((e) => Oni.fromJson(e as Map<String, dynamic>))
+        .toList();
 
-Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
+Map<String, dynamic> _$OniModelToJson(OniModel instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'avatar': instance.avatar,
       'createdAt': instance.createdAt,
+      'home_store': instance.home_store,
+    };
+
+Oni _$OniFromJson(Map<String, dynamic> json) => Oni(
+      json['id'] as int?,
+      json['title'] as String?,
+    );
+
+Map<String, dynamic> _$OniToJson(Oni instance) => <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
     };
 
 // **************************************************************************
@@ -26,8 +39,8 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RestClient implements RestClient {
-  _RestClient(
+class _OniClient implements OniClient {
+  _OniClient(
     this._dio, {
     this.baseUrl,
   }) {
@@ -39,13 +52,13 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<Map<String, Task>> getTasks() async {
+  Future<OniModel> getTasks() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Map<String, Task>>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<OniModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -57,8 +70,7 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!.map((k, dynamic v) =>
-        MapEntry(k, Task.fromJson(v as Map<String, dynamic>)));
+    final value = OniModel.fromJson(_result.data!);
     return value;
   }
 

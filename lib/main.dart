@@ -5,8 +5,7 @@ import 'package:dio/dio.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'model/api.dart';
+import 'package:mango/model/oni/oni.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,17 +45,17 @@ class Page extends StatelessWidget {
   Widget build(BuildContext context) {
     run();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarDividerColor: Colors.white,
+      systemNavigationBarColor: Colors.black,
+      systemNavigationBarDividerColor: Colors.black,
     ));
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           toolbarHeight: 0,
           elevation: 0,
           systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
-            statusBarIconBrightness: Brightness.dark,
+            statusBarColor: Colors.black,
+            statusBarIconBrightness: Brightness.light,
           ),
         ),
         body: Center(
@@ -65,16 +64,22 @@ class Page extends StatelessWidget {
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w500,
-              // color: Colors.white,
+              color: Colors.white,
             ),
           ),
         ));
   }
 
   void run() async {
+    print('!!======================================!!');
     Dio dio = Dio();
-    RestClient restClient = RestClient(dio);
-    var n = await restClient.getTasks();
-    print('im $n');
+    // RestClient1 restClient = RestClient1(dio);
+    OniClient oni = OniClient(dio);
+    var n = await oni.getTasks();
+    print('** $n');
+    print('** ${n.home_store![1].title}');
+    // for (int i = 0; i < 3; i++) {
+    //   print({n.home_store}[i]);
+    // }
   }
 }
