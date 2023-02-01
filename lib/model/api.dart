@@ -25,19 +25,16 @@ abstract class RestClient {
 
   @Headers(<String, dynamic>{"Content-Type": "application/json"})
   @GET("")
-   Future<Map<String, dynamic>> map = json.decode(response.body);
-    // List<dynamic> data = map["dataKey"];
-    // print(data[0]["name"]);
+  //  Future<Map<String, dynamic>> map = json.decode(response.body);
+  // List<dynamic> data = map["dataKey"];
+  // print(data[0]["name"]);
   // Future<Map<String, PhoneHomeStoreModel>> getTasks();
-  // Future<
-  // List<PhoneHomeStoreModel>
-  // >
-   getTasks() {
-    @override
-    Map<String, dynamic> map = json.decode(response.body);
-    List<dynamic> data = map["dataKey"];
-    print(data[0]["name"]);
-  }
+  Future<List<PhoneHomeStoreModel>> getTasks();
+  //   @override
+  //   Map<String, dynamic> map = json.decode(response.body);
+  //   List<dynamic> data = map["dataKey"];
+  //   print(data[0]["name"]);
+  // }
 }
 
 @JsonSerializable()
@@ -53,6 +50,6 @@ class Task {
   Map<String, dynamic> toJson() => _$TaskToJson(this);
 }
 
-Map<String, dynamic> map = json.decode(response.body);
-    List<dynamic> data = map["dataKey"];
-    print(data[0]["name"])
+// Map<String, dynamic> map = json.decode(response.body);
+//     List<dynamic> data = map["dataKey"];
+//     print(data[0]["name"])
